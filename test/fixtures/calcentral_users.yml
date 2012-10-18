@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  uid: MyString
+  preferredName: MyString
+  link: MyString
+  firstLogin: MyString
+
+two:
+  uid: MyString
+  preferredName: MyString
+  link: MyString
+  firstLogin: MyString
