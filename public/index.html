@@ -206,11 +206,22 @@
     <script type="text/javascript" charset="utf-8">
 	    $(function() {
 		    function addUser(user) {
-			    $('#users').append('<li>' + user.preferredName + '</ul>');
+			    $('#users').append('<li>' + user.id + " : " + user.uid + ' : ' + user.preferredName + '</ul>');
 		    }
 
 		    $('#new_user').submit(function(e) {
 			    $.post('/calcentral_users', $(this).serialize(), addUser);
+			    this.reset();
+			    e.preventDefault();
+		    });
+
+		    $('#me_prefs').submit(function(e) {
+			    $.ajax({
+				   url: '/calcentral_users/' + $("#currentuser_id").val(),
+				   type: 'PUT',
+				   data: $(this).serialize(),
+				   success: addUser
+			    });
 			    this.reset();
 			    e.preventDefault();
 		    });
@@ -223,9 +234,17 @@
   </head>
   <body>
   <div id="container">
+	  <h1>Me</h1>
+	  <form id="me_prefs">
+		  <input type="text" name="calcentral_user[id]" id="currentuser_id">
+		  <input type="text" name="calcentral_user[uid]" id="currentuser_uid">
+		  <input type="text" name="calcentral_user[preferredName]" id="currentuser_preferredName">
+		  <input type="submit" value="Update">
+	  </form>
 	  <h1>User List</h1>
 	  <form id="new_user">
-		  <input type="text" name="calcentral_user[preferredName]" id="user_name">
+		  <input type="text" name="calcentral_user[uid]" id="user_uid">
+		  <input type="text" name="calcentral_user[preferredName]" id="user_preferredName">
 		  <input type="submit" value="Add">
 	  </form>
 	  <ul id="users"></ul>
