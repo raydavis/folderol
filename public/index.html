@@ -208,6 +208,12 @@
 		    function addUser(user) {
 			    $('#users').append('<li>' + user.id + " : " + user.uid + ' : ' + user.preferredName + '</ul>');
 		    }
+		    function addAllUsers() {
+			    $('#users').empty();
+			    $.getJSON('/calcentral_users', function(users) {
+				    $.each(users, function() { addUser(this); });
+			    });
+		    }
 
 		    $('#new_user').submit(function(e) {
 			    $.post('/calcentral_users', $(this).serialize(), addUser);
@@ -220,15 +226,13 @@
 				   url: '/calcentral_users/' + $("#currentuser_id").val(),
 				   type: 'PUT',
 				   data: $(this).serialize(),
-				   success: addUser
+				   success: addAllUsers()
 			    });
 			    this.reset();
 			    e.preventDefault();
 		    });
 
-		    $.getJSON('/calcentral_users', function(users) {
-			    $.each(users, function() { addUser(this); });
-		    });
+		    addAllUsers();
 	    });
     </script>
   </head>
@@ -244,7 +248,6 @@
 	  <h1>User List</h1>
 	  <form id="new_user">
 		  <input type="text" name="calcentral_user[uid]" id="user_uid">
-		  <input type="text" name="calcentral_user[preferredName]" id="user_preferredName">
 		  <input type="submit" value="Add">
 	  </form>
 	  <ul id="users"></ul>

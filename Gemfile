@@ -25,3 +25,8 @@ gem 'json'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+gem 'rspec-rails'
+gem 'capybara'
+gem 'ruby-oci8'
+gem 'activerecord-oracle_enhanced-adapter'
