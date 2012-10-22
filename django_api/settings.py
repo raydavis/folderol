@@ -1,4 +1,5 @@
 # Django settings for django_api project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -17,8 +18,17 @@ DATABASES = {
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    },
+    'campusdb': {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': os.environ.get('ORACLE_SID'),
+        'USER': os.environ.get('ORACLE_USER'),
+        'PASSWORD': os.environ.get('ORACLE_PASSWORD'),
+        'HOST': os.environ.get('ORACLE_HOST'),
+        'PORT': os.environ.get('ORACLE_PORT'),
     }
 }
+DATABASE_ROUTERS = ['cc_app.db_routers.CampusDbRouter']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
