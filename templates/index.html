@@ -42,7 +42,7 @@
 		    });
 
 		    $('#me_prefs').submit(function(e) {
-                var param = {'uid': $('#currentuser_uid').val(), 'preferred_name': $('#currentuser_preferred_name').val()};
+                var param = {'uid': $('#currentuser_uid').val(), 'custom_preferred_name': $('#currentuser_preferred_name').val()};
 			    $.ajax({
 				   url: '/api/user/' + $("#currentuser_id").val() + '/',
 				   type: 'PUT',
@@ -64,7 +64,7 @@
 	  <form id="me_prefs">
 		  <input type="text" name="user_id" id="currentuser_id">
 		  <input type="text" name="uid" id="currentuser_uid">
-		  <input type="text" name="preferred_name" id="currentuser_preferred_name">
+		  <input type="text" name="custom_preferred_name" id="currentuser_preferred_name">
 		  <input type="submit" value="Update">
 	  </form>
 	  <h1>User List</h1>
